@@ -1,0 +1,40 @@
+public class ContaCorrente
+{
+    private readonly int numero;
+    private string titular;
+    private double saldo;
+    private double limite;
+
+    public ContaCorrente(int numero, string titular)
+    {
+        this.numero = numero;
+        this.titular = titular;
+        this.saldo = 0;
+        this.limite = 500;
+    }
+
+    public double SaldoTotal => saldo + limite;
+
+    public string StatusConta => saldo < 0 ? "Negativo" : "Positivo";
+
+    public void Depositar(double valor)
+    {
+        if (valor > 0)
+            saldo += valor;
+    }
+
+    public bool Sacar(double valor)
+    {
+        if (valor <= SaldoTotal)
+        {
+            saldo -= valor;
+            return true;
+        }
+        return false;
+    }
+
+    public override string ToString()
+    {
+        return $"Conta: {numero} | Titular: {titular} | Saldo: {saldo} | Limite: {limite}";
+    }
+}
